@@ -13,6 +13,7 @@ from os import path
 #string,                string,              string,      list
 
 
+
 def return_file_lists(original_input_folder, modded_input_folder, filetype="", new_extensions=[]):
     original_file_list = []
     modded_file_list = []
@@ -31,25 +32,19 @@ def return_file_lists(original_input_folder, modded_input_folder, filetype="", n
         print(type(newlist))
         print(newlist)
         modded_file_list.append(newlist)
-
     else:
         for filetype in common_twine_plaintext:
-            os.chdir(original_input_folder)
-            print(type(original_file_list))
-            print(type(modded_file_list))
-            newlist = glob.glob(original_input_folder + '/**/*.'+filetype, recursive=True)
-            print(type(newlist))
-            print(newlist)
-            original_file_list.append(newlist)
-            os.chdir(modded_input_folder)
-            newlist = glob.glob(modded_input_folder + '/**/*.'+filetype, recursive=True)
-            print(type(newlist))
-            print(newlist)
-            modded_file_list.append(newlist)
+            if filetype:
+                os.chdir(original_input_folder)
+                newlist = glob.glob(original_input_folder + '/**/*.'+filetype, recursive=True)
+                original_file_list.append(newlist)
+                os.chdir(modded_input_folder)
+                newlist = glob.glob(modded_input_folder + '/**/*.'+filetype, recursive=True)
+                modded_file_list.append(newlist)
 
     return original_file_list, modded_file_list
 
-def return_common_files(original_file_list, modded_file_list, original_repo_name, modded_repo_name):
+def return_common_files(original_file_list, modded_file_list, original_repo_name="", modded_repo_name=""):
     #returns all files that share a directory + filename with something in the other structure
     #IE, if both contain a /home/user/original/twine/tests/file.twee and a /home/user/original/modded/twine/tests/file.twee then that directory (truncated to be inside of the respective repos) will be returned
     # but if one repo contains a twine/tests/file.twee and the other twine/src/file.twee, then that won't be returned
@@ -71,6 +66,12 @@ def modded_extra_files(original_file_list, modded_file_list, original_repo_name,
     extras = [filename for filename in modded_file_list_reduced if filename not in original_file_list_reduced]
     return extras
 
+original_input_folder = "/home/maxahoy/xchange-life"
+modded_input_folder = "/home/maxahoy/xchange-life-oral-mod"
+new_extensions = []
+original, modded = return_file_lists(original_input_folder, modded_input_folder)
 
+#print("Original\n",original)
+#print("Modded\n", modded)
 
 
