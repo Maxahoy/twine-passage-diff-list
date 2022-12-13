@@ -8,5 +8,9 @@ Presents that list to the user for confirmation along with their contained files
 Goes through each file, identifies passages with identical contents and passages with differing contents
 Also identifies passages existing in one version and not the other
 
+Should take in some command line arguments
+original repo directory for original twine project
+modded repo for modded twine projectg
+
 """
 

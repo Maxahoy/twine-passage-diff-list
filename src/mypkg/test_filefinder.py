@@ -17,9 +17,10 @@ Since this is a personal project I'm not going to write a super extensive testin
  Other test cases that I would consider using in this case but don't feel like spending time, 
  since this repo has one purpose on a personal project:
 
- - Testing out if the common files function can separate file directories properly (it can, but tests should show that)
+ - Testing out if the common files function can separate file directories properly
+     (it can, and tests on my local drive showed that, but I'm not putting my filesystem's info on github)
  - Testing out if repos can be used on different drives (since Windows especially doesn't have location independence in its file system)
- - O
+ 
 """
 
 #these versions don't have directory structures

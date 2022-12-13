@@ -24,13 +24,13 @@ def return_file_lists(original_input_folder, modded_input_folder, filetype="", n
     if filetype:
         os.chdir(original_input_folder)
         newlist = glob.glob(original_input_folder + '/**/*.'+filetype, recursive=True)
-        print(type(newlist))
-        print(newlist)
+        #print(type(newlist))
+        #print(newlist)
         original_file_list.append(newlist)
         os.chdir(modded_input_folder)
         newlist = glob.glob(modded_input_folder + '/**/*.'+filetype, recursive=True)
-        print(type(newlist))
-        print(newlist)
+        #print(type(newlist))
+        #print(newlist)
         modded_file_list.append(newlist)
     else:
         for filetype in common_twine_plaintext:
@@ -51,17 +51,35 @@ def return_common_files(original_file_list, modded_file_list, original_repo_name
 
     #go through all the files in the original list truncate until after the appearance of "original repo name"
     # do the same operation except using the modded_repo_name on the other list
-    original_file_list_reduced = original_file_list.split(original_repo_name, 1)[1]
-    modded_file_list_reduced = modded_file_list.split(modded_repo_name, 1)[1]
+    #original_file_list_reduced = original_file_list.split(original_repo_name, 1)[1]
+    #modded_file_list_reduced = modded_file_list.split(modded_repo_name, 1)[1]
+    original_file_list_reduced = []
+    modded_file_list_reduced = []
+    if original_repo_name and modded_repo_name:
+        original_file_list_reduced = [filename.split(original_repo_name)[1] for filename in original_file_list]
+        modded_file_list_reduced = [filename.split(modded_repo_name)[1] for filename in modded_file_list]
+    else:
+            original_file_list_reduced = original_file_list
+            modded_file_list_reduced = modded_file_list
 
-    common = original_file_list_reduced.intersection(modded-file_list_reduced)
+    common = [element for element in original_file_list_reduced if element in modded_file_list_reduced]
+    #original_file_list_reduced.intersection(modded-file_list_reduced)
     return common
 
 def modded_extra_files(original_file_list, modded_file_list, original_repo_name, modded_repo_name):
-    original_file_list_reduced = original_file_list.split(original_repo_name, 1)[1]
-    modded_file_list_reduced = modded_file_list.split(modded_repo_name, 1)[1]
+    #list has no attribute "split"
+    #need to use a list comprehension for both of these
+    
+    original_file_list_reduced = []
+    modded_file_list_reduced = []
+    if original_repo_name and modded_repo_name:
+        original_file_list_reduced = [filename.split(original_repo_name)[1] for filename in original_file_list]
+        modded_file_list_reduced = [filename.split(modded_repo_name)[1] for filename in modded_file_list]
+    else:
+            original_file_list_reduced = original_file_list
+            modded_file_list_reduced = modded_file_list
 
-    common = original_file_list_reduced.intersection(modded-file_list_reduced)
+    common =  [element for element in original_file_list_reduced if element in modded_file_list_reduced]
     #extras = modded_file_list_reduced - common
     extras = [filename for filename in modded_file_list_reduced if filename not in original_file_list_reduced]
     return extras
