@@ -41,11 +41,14 @@ def test_get_common_files_base_case():
     expected = ["a.txt", "b.txt", "c.txt"]
     assert expected == result
 
-#TODO
+#two empty inputs should return an empty output
 def test_get_common_files_empty():
     result = return_common_files(original_empty, modded_empty)
+    assert [] == result
 
-#TODO
+# if the original includes files the modded doesn't, the intersection should still be returned
 def test_get_common_files_original_larger():
-    
+    result = return_common_files(original_expanded, modded_base_case)
+    expected = ["a.txt", "b.txt", "c.txt", "d.txt"]
+    assert expected == result
 
