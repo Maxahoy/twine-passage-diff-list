@@ -12,5 +12,7 @@ Should take in some command line arguments
 original repo directory for original twine project
 modded repo for modded twine projectg
 
+Todo now, write function to go through files found and 
+
 """
 
