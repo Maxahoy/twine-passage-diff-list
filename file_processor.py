@@ -2,6 +2,7 @@
 import os
 import sys
 import path
+from srx.mypkg.filefinder import *
 #file processor
 """
 TODO:
@@ -11,11 +12,30 @@ TODO:
 
 """
 
+#return all passage names in file
+def get_passages_in_file(twee_file):
+    twee_file_line_list = []
+    with open(twee_file) as file:
+        lines = [line.rstrip() for line in file]
+    passage_lines = [line.rstrip().split()[1] for line in twee_file_line_list if "::" in line]
+    return passage_lines
+        
+
 # TODO
 # INPUT: original file list, modded file list, original repo directory path, modded repo filepath
 #
 #
-def find_common_passages_in_common_files(original_file_list, modded_file_list, original_repo, modded_repo):
+def find_common_passages_in_common_files(original_file_list, modded_file_list, original_repo="", modded_repo=""):
+    # get a list of all passages in file a and file b
+    # get list of common files first
+    # create list of files by appending repo names to file names
+    common_files = return_common_files(original_file_list, modded_file_list, original_repo, modded_repo)
+    # get list of passages in these files
+    passage_list = 
+
+    #
+    #
+
 
 
 #TODO
